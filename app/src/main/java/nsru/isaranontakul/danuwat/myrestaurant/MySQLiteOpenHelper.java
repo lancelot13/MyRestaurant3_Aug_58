@@ -18,7 +18,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 1;
     // first colunm in table can't use id;
     private static final String CREATE_USER_TABLE = "CREATE TABLE userTable (_id integer primary key,user text,password text,name text);";
-    private static final String CREATE_FOOD_TABLE = "CREATE TABLE foodTable (_id interger primary key,food,source,price text);";
+    private static final String CREATE_FOOD_TABLE = "CREATE TABLE foodTable (_id integer primary key,food,source,price text);";
     //private static final String CREATE_ORDER_TABLE = "CREATE TABLE (_id integer primary,officeid ,desk,food,item text);";
 
     //ALt+Enter to complete super constructor to superclass (sqlitopenhelper)

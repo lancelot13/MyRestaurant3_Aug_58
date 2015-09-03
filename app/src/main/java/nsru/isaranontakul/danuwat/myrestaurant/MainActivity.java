@@ -8,6 +8,8 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
     //Explicit
     private UserTable objUserTable;
+    private FoodTable objFoodTable;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void TestInsertDB() {
         objUserTable.addNewUser("test", "123456", "lancelotแรก");
+        objFoodTable.addNewFood("Hambergur", "testSource", "250");
     }
 
     private void CreateConnectDB() {
         objUserTable = new UserTable(this);
+        objFoodTable = new FoodTable(this);
     }
 
     @Override
@@ -52,4 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    //public void setObjFoodTable(FoodTable objFoodTable) {
+    //    this.objFoodTable = objFoodTable;
+    //}
 }

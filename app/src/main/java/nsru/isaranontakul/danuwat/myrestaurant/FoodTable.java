@@ -11,7 +11,7 @@ public class FoodTable {
     private MySQLiteOpenHelper objMySQLiteOpenHelper;
     private SQLiteDatabase writeSqLiteDatabase, readSqLiteDatabase;
 
-    public static final String FOOD_TABLE ="userTable";
+    public static final String FOOD_TABLE ="foodTable";
     public static final String COLUMN_ID_FOOD = "_id";
     public static final String COLUMN_FOOD = "food";
     public static final String COLUMN_SOURCE = "source";
@@ -23,7 +23,7 @@ public class FoodTable {
         readSqLiteDatabase = objMySQLiteOpenHelper.getReadableDatabase();
     }
 
-    public long addNewUser(String strFood,String strSource, String strPrice) {
+    public long addNewFood(String strFood,String strSource, String strPrice) {
 
         ContentValues objContentValues = new ContentValues();
         objContentValues.put(COLUMN_FOOD,strFood);
