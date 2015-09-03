@@ -36,7 +36,6 @@ public class UserTable {
         objContentValues.put(COLUMN_USER,strUser);
         objContentValues.put(COLUMN_PASS,strPassword);
         objContentValues.put(COLUMN_NAME,strName);
-        // ชื่อตาราง, null, ค่าที่ต้องการส่ง
         return writeSqLiteDatabase.insert(USER_TABLE,null,objContentValues);
     }
 

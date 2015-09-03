@@ -1,5 +1,7 @@
 package nsru.isaranontakul.danuwat.myrestaurant;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,13 +18,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Create and Connect DB
+        ////////Create and Connect DB
         CreateConnectDB();
 
-        //Test Insert Record
-        TestInsertDB();
+        ////////Test Insert Record
+        //TestInsertDB();
 
+        ////////Delete All Data
+        deleteAllData();
 
+        ///////Synchronize JSON to SQLlite
+        synJSON2SQLite();
+
+    }
+
+    private void synJSON2SQLite() {
+        ///////Change Policy google ตั้งไว้ว่า ไม่ให้ android ติดต่อกับ http ftp ได้ ต้องเปลี่ยน policy เป็น permit all
+        StrictMode.ThreadPolicy objThreadPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        
+
+    }
+
+    private void deleteAllData() {
+        //mode.private จะให้ลบเฉพาะข้อมูล ห้าม drop
+        SQLiteDatabase objSqLiteDatabase = openOrCreateDatabase("Restaurant.db",MODE_PRIVATE,null);
+        objSqLiteDatabase.delete("userTable", null, null);
+        objSqLiteDatabase.delete("foodTable", null, null);
     }
 
     private void TestInsertDB() {
