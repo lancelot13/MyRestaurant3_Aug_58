@@ -17,8 +17,14 @@ public class MainActivity extends AppCompatActivity {
         //Create and Connect DB
         CreateConnectDB();
 
+        //Test Insert Record
+        TestInsertDB();
 
 
+    }
+
+    private void TestInsertDB() {
+        objUserTable.addNewUser("test", "123456", "lancelotแรก");
     }
 
     private void CreateConnectDB() {
