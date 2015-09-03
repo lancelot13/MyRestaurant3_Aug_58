@@ -4,8 +4,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
     //Explicit
@@ -33,9 +42,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void synJSON2SQLite() {
-        ///////Change Policy google ตั้งไว้ว่า ไม่ให้ android ติดต่อกับ http ftp ได้ ต้องเปลี่ยน policy เป็น permit all
+        ///////Change Policy :: google ตั้งไว้ว่า ไม่ให้ android ติดต่อกับ http ftp ได้ ต้องเปลี่ยน policy เป็น permit all
         StrictMode.ThreadPolicy objThreadPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        
+        StrictMode.setThreadPolicy(objThreadPolicy);
+
+        ///วนรัน เท่าจำนวน table
+        int intTime = 0;
+        while (intTime <= 1) {
+            //
+            InputStream objInputStream = null;
+            String strJSON = null;
+            String strUserURL = "http://swiftcodingthai.com/3sep/lancelot/php_get_data_lancelot.php";
+            String strFoodURL = "http://swiftcodingthai.com/3sep/php_get_data_food.php";
+
+            HttpPost objHttpPost = null;
+
+            //1. Create InputStream
+            // ใช้งานโดยไม่ต่อ internet
+            // server ล่ม
+            // URL ผิด
+            try {
+                HttpClient objHttpClient = new DefaultHttpClient();
+                //รอบแรกำงานกับ user รอบที่สองทำงานกับ food
+                if (intTime != 1) {
+                    objHttpPost = new HttpPost(strUserURL);
+                } else {
+                    objHttpPost = new HttpPost(strFoodURL);
+                }
+
+                HttpResponse objHttpResponse = objHttpClient.execute(objHttpPost);
+                HttpEntity objHttpEntity = objHttpResponse.getEntity();
+                objInputStream = objHttpEntity.getContent();
+
+            } catch (Exception e) {
+                Log.d("Rest", "Input ==> " + e.toString());
+            }
+            //2. Craete strJSON
+
+            //3. update to SQLite
+
+            intTime++;
+        }
 
     }
 
