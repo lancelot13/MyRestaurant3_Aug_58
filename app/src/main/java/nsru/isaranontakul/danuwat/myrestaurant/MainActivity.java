@@ -6,11 +6,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+    //Explicit
+    private UserTable objUserTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Create and Connect DB
+        CreateConnectDB();
+
+
+
+    }
+
+    private void CreateConnectDB() {
+        objUserTable = new UserTable(this);
     }
 
     @Override
