@@ -15,7 +15,7 @@ public class FoodTable {
     public static final String COLUMN_SOURCE = "password";
     public static final String COLUMN_PRICE = "name";
 
-    
+
 
 
 }
