@@ -14,7 +14,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
     //Explicit
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             // URL ผิด
             try {
                 HttpClient objHttpClient = new DefaultHttpClient();
-                //รอบแรกำงานกับ user รอบที่สองทำงานกับ food
+                //รอบแรกทำงานกับ user รอบที่สองทำงานกับ food
                 if (intTime != 1) {
                     objHttpPost = new HttpPost(strUserURL);
                 } else {
@@ -77,8 +79,24 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Log.d("Rest", "Input ==> " + e.toString());
             }
-            //2. Craete strJSON
+            //2. Create strJSON
+            try {
+                /// สร้าง Buffer Reader โดยใส่ input Stream เข้าไปแล้วเข้ารหัสด้วย utf8 // ตัดเป็นท่อนๆๆ
+                BufferedReader objBufferedReader = new BufferedReader(new InputStreamReader(objInputStream, "UTF-8"));
+                //สร้าง Strinf ที่สามารถ append ได้
+                StringBuilder objStringBuilder = new StringBuilder();
+                String strLine = null;
 
+                // นำมาต่อกัน ด้วย StringBuilder
+                while ((strLine=objBufferedReader.readLine())!=null  ) {
+                    objStringBuilder.append(strLine);
+                }
+                objInputStream.close();
+                strJSON = objStringBuilder.toString();
+
+            } catch (Exception e) {
+                Log.d("Rest","Input ==>"+e.toString());
+            }
             //3. update to SQLite
 
             intTime++;
